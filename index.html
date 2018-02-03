@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JavaScript - A-Frame School</title>
+    <meta name="description" content="JavaScript - A-Frame School">
+    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+    <script>
+      AFRAME.registerComponent('school-playground', {
+        /**
+         * Code within this function will be called when everything in <a-scene> is ready and loaded.
+         */
+        init: function () {
+          // Add code here!
+          var sceneEl = document.querySelector('a-scene');
+          for(var i = 0; i <= 10; i++){
+            for(var o = -5; o <= 5; o++){
+              var box = document.createElement("a-box");
+              box.setAttribute("position", "" + (o/4) + " " + (i/4) + " " + 0 + "");
+              box.setAttribute("color", "red");
+              box.setAttribute("mixin","cube");
+              sceneEl.appendChild(box);
+            }
+          }
+        }
+      });
+      
+      AFRAME.registerComponent('controller-event-handler', {
+        init: function () {
+          var el = this.el;
+          el.addEventListener('mouseenter', function () {
+            el.setAttribute('material', 'color', '#24CAFF');  
+          });
+        }
+      });
+    </script>
+  </head>
+  <body>
+  
+    
+    <a-scene school-playground>
+      <a-camera position="0 -2 4">
+        <a-cursor></a-cursor>
+      </a-camera>
+      <a-assets>
+        <a-mixin id="cube"
+                 controller-event-handler
+                 geometry="primitive: box; height: 0.24; width: 0.24; depth: 0.24"
+                 material="color: #EF2D5E;"></a-mixin>
+      </a-assets>
+      <a-sky src="https://farm5.staticflickr.com/4694/39605680421_a998397de4_k.jpg"></a-sky>
+    </a-scene>
+  </body>
+</html>
